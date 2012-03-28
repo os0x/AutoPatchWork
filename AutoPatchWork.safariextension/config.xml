@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        id="extensions:os0x-AutoPatchWork"
+        version="1.9.6">
+  <name>AutoPatchWork</name>
+  <description>Automatically loads the next page and inserts into current page.</description>
+  <author href="http://ss-o.net/">os0x</author>
+  <icon src="Icon-64.png"/>
+  <access origin="http://ss-o.net" subdomains="true"/>
+  <access origin="http://wedata.net" subdomains="true"/>
+  <update-description href="https://ssl68.heteml.jp/os0x/ss-onet/opera/extension/AutoPatchWork.update.xml"/>
+</widget>

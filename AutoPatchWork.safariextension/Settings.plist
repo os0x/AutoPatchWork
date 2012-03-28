@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>DefaultValue</key>
+		<true/>
+		<key>Key</key>
+		<string>auto_start</string>
+		<key>Title</key>
+		<string>auto start</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<true/>
+		<key>Key</key>
+		<string>target_blank</string>
+		<key>Title</key>
+		<string>open new tabs from inserted links</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<false/>
+		<key>Key</key>
+		<string>disable_iframe</string>
+		<key>Title</key>
+		<string>no work FRAME</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>400</real>
+		<key>Key</key>
+		<string>remain_height</string>
+		<key>MaximumValue</key>
+		<real>2000</real>
+		<key>StepValue</key>
+		<real>100</real>
+		<key>Title</key>
+		<string>base remain height</string>
+		<key>Type</key>
+		<string>Slider</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<false/>
+		<key>Key</key>
+		<string>debug_mode</string>
+		<key>Title</key>
+		<string>debug mode</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>Type</key>
+		<string>Separator</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>Exclude Filter by URL(prefix match, Space-separated)</string>
+		<key>Type</key>
+		<string>Group</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string></string>
+		<key>Key</key>
+		<string>excludes</string>
+		<key>Title</key>
+		<string>URLs</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>on</string>
+		<key>Key</key>
+		<string>bar_status</string>
+		<key>Title</key>
+		<string>show status bar on page bottom</string>
+		<key>Titles</key>
+		<array>
+			<string>ON</string>
+			<string>OFF</string>
+		</array>
+		<key>Type</key>
+		<string>RadioButtons</string>
+		<key>Values</key>
+		<array>
+			<string>on</string>
+			<string>off</string>
+		</array>
+	</dict>
+</array>
+</plist>

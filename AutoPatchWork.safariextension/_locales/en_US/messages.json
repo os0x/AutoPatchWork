@@ -1,0 +1,56 @@
+{
+  "chrome_extension_name":{
+    "message":"AutoPatchWork"
+  },
+  "chrome_extension_description":{
+    "message":"Automatically loads the next page and inserts into current page when you reach the end of the page. like AutoPagerize."
+  },
+  "update_siteinfo":{
+    "message":"Update SITEINFO"
+  },
+  "auto_start":{
+    "message":"auto start"
+  },
+  "open_newtab":{
+    "message":"open new tabs from inserted links"
+  },
+  "noiframe":{
+    "message":"not work FRAME"
+  },
+  "remain_height":{
+    "message":"base remain height"
+  },
+  "debugmode":{
+    "message":"debug mode"
+  },
+  "exclude_filter":{
+    "message":"Exclude Filter by URL"
+  },
+  "filter_prefix":{
+    "message":"prefix"
+  },
+  "filter_domain":{
+    "message":"domain"
+  },
+  "filter_regexp":{
+    "message":"regexp"
+  },
+  "add":{
+    "message":"Add"
+  },
+  "save":{
+    "message":"Save"
+  },
+  "del":{
+    "message":"Del"
+  },
+  "undo":{
+    "message":"Undo"
+  },
+  "separator_style":{
+    "message":"Page Separator Style"
+  },
+  "open_siteinfo_manager":{
+    "message":"Open siteinfo manager"
+  }
+}

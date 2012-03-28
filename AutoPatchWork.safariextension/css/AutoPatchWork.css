@@ -1,0 +1,6 @@
+.autopagerize_page_separator_blocks .autopagerize_link{
+  display:inline-block;
+}
+.autopagerize_page_separator_blocks .autopagerize_link:before{
+  content:"page: " attr(number);
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>os0x</string>
+	<key>Builder Version</key>
+	<string>534.54.16</string>
+	<key>CFBundleDisplayName</key>
+	<string>AutoPatchWork</string>
+	<key>CFBundleIdentifier</key>
+	<string>net.os0x.autopatchwork</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.9.6</string>
+	<key>CFBundleVersion</key>
+	<string>1.9.6</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>index.html</string>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>includes/AutoPatchWork.js</string>
+			</array>
+		</dict>
+		<key>Stylesheets</key>
+		<array>
+			<string>AutoPatchWork.css</string>
+		</array>
+		<key>Whitelist</key>
+		<array>
+			<string>http://*/*</string>
+			<string>https://*/*</string>
+		</array>
+	</dict>
+	<key>Description</key>
+	<string>Automatically loads the next page and inserts into current page when you reach the end of the page. like AutoPagerize. </string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://ss-o.net/safari/extension/AutoPatchWork/update.plist</string>
+	<key>Website</key>
+	<string>http://ss-o.net/</string>
+</dict>
+</plist>

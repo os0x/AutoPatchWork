@@ -1,0 +1,107 @@
+#AutoPatchWork-Bar{
+	position:fixed !important;
+	bottom:0px !important;
+	left:0px !important;
+	right:0px !important;
+	height:0px !important;
+	background:rgba(0,255,0,0) !important;
+	border-top   :12px solid rgba(0, 255, 0, 0.01) !important;
+	border-bottom: 1px solid rgba(0, 255, 0,    1) !important;
+	color:rgba(0,0,0,0) !important;
+	z-index:10000 !important;
+	text-align:right;
+}
+#AutoPatchWork-Bar.off{
+	border-top   : 2px solid rgba(128, 128, 128, 0.1) !important;
+	border-bottom: 2px solid rgba(128, 128, 128, 0.1) !important;
+	margin-top:9px;
+}
+#AutoPatchWork-Bar:hover{
+	border-top-width:0px !important;
+	height:24px !important;
+	/*margin-top:-12px;*/
+	color:rgba(0,0,0,1) !important;
+	background-color:rgba(222,222,222,.75) !important;
+}
+#AutoPatchWork-Bar:hover:after{
+	position:absolute;
+	display:block;
+	top:0px !important;
+	left:10px !important;
+	content:"AutoPatchWork / ON" !important;
+	font-size:15px !important;
+}
+#AutoPatchWork-Bar.loading{
+	-webkit-animation-name: loading;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count:infinite;
+	animation-name: loading;
+	animation-duration: 1s;
+	animation-iteration-count:infinite;
+}
+@-webkit-keyframes loading {
+	from {
+		border-top-color   :rgba(0, 255, 255, 0.75);
+		border-bottom-color:rgba(0, 128, 255, 0.75);
+		border-top-width:1px;
+		border-bottom-width:12px;
+	}
+	to {
+		border-top-color   :rgba(0, 128, 255, 0.75);
+		border-bottom-color:rgba(0, 128, 255, 0.75);
+		border-top-width:12px;
+		border-bottom-width:1px;
+	}
+}
+@keyframes loading {
+	from {
+		border-top-color   :rgba(0, 255, 255, 0.75);
+		border-bottom-color:rgba(0, 128, 255, 0.75);
+		border-top-width:1px;
+		border-bottom-width:12px;
+	}
+	to {
+		border-top-color   :rgba(0, 128, 255, 0.75);
+		border-bottom-color:rgba(0, 128, 255, 0.75);
+		border-top-width:12px;
+		border-bottom-width:1px;
+	}
+}
+#AutoPatchWork-Bar.terminated{
+	border-top   :12px solid rgba(255, 128, 64, .5) !important;
+	border-bottom: 1px solid rgba(255, 128, 64, .5) !important;
+}
+#AutoPatchWork-Bar.error{
+	border-top   :12px solid rgba(255, 0, 0, .5) !important;
+	border-bottom: 1px solid rgba(255, 0, 0, .5) !important;
+}
+#AutoPatchWork-Bar.loading:hover:after{
+	content:"loading..." !important;
+}
+#AutoPatchWork-Bar.terminated:hover:after{
+	content:"terminated." !important;
+}
+#AutoPatchWork-Bar.error:hover:after{
+	content:"error" !important;
+}
+#AutoPatchWork-Bar.remove{
+	display:none !important;
+}
+#AutoPatchWork-Bar.off:hover:after{
+	content:"AutoPatchWork / OFF" !important;
+	color:#444 !important;
+}
+#AutoPatchWork-Bar button{
+	display:none;
+}
+#AutoPatchWork-Bar:hover button{
+	display:inline-block;
+	background: #222;
+	background: -webkit-gradient(linear, left top, left bottom,from(#222),to(#666));
+	color:#fff;
+	height:22px;
+	border:1px solid #aaa;
+	cursor:pointer;
+	margin:0px 0px 0px 10px;
+	width:160px;
+}

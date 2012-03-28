@@ -1,0 +1,23 @@
+{
+   "background_page": "index.html",
+   "content_scripts": [ {
+      "js": [ "includes/AutoPatchWork.js" ],
+      "matches": [ "http://*/*" , "https://*/*" ],
+      "run_at": "document_end",
+      "all_frames":true
+   } ],
+  "default_locale": "en_US",
+   "icons": {
+      "16": "Icon-16.png",
+      "32": "Icon-32.png",
+      "48": "Icon-48.png",
+      "64": "Icon-64.png",
+      "128": "Icon-128.png"
+   },
+   "description": "Automatically loads the next page and inserts into current page when you reach the end of the page. like AutoPagerize.",
+   "id": "pgippdefedhbfjdpladgebmcoghhkhil",
+   "name": "AutoPatchWork",
+   "permissions": [ "http://wedata.net/", "http://ss-o.net/", "tabs" ],
+   "options_page": "options.html",
+   "version": "1.9.6"
+}

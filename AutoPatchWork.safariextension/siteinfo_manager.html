@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AutoPatchWork SITEINFO Manager</title>
+<link href="css/AutoPatchWork.bar.css" rel="stylesheet" type="text/css">
+<style>
+body,ul,ol,dl,li,dd,dt,p,div,h1,h2,h3,h4,h5,h6{
+margin:0;
+padding:0;
+}
+.top{
+position:fixed;
+top:0px;
+background:#fff;
+width:100%;
+font-size:small;
+}
+.top h1{
+color:#fff;
+background: #222;
+background: -webkit-gradient(linear, left top, left bottom, from(#222), to(#666));
+font-size:medium;
+text-shadow:0px 0px 1px #cccccc;
+padding:2px;
+}
+#siteinfo_table{
+margin: 200px 0 0.5em 1em;
+overflow:auto;
+width:98%;
+border-collapse:collapse;
+font-size:small;
+}
+#siteinfo_table td{
+border:1px solid #996633;
+}
+
+#siteinfo_view{
+position:fixed;
+top:-2000px;
+bottom:2000px;
+left:0px;
+right:0px;
+background:rgba(255,255,255, 0.8);
+/*display:none;*/
+-moz-transition: all 0.3s ease-in-out; /* Firefox */
+-webkit-transition: all 0.3s ease-in-out; /* Safari and Chrome */
+-o-transition: all 0.3s ease-in-out;  /* Opera */
+transition: all 0.3s ease-in-out; /* Browsers that Support it */
+}
+
+#siteinfo_view > dl{
+border:5px solid #996633;
+border-radius:15px;
+padding:10px;
+margin:5px auto;
+width:95%;
+background:#fff;
+position:relative;
+}
+
+#siteinfo_view dt,
+#siteinfo_view dd{
+padding:4px;
+display:inline-block;
+}
+#siteinfo_view dl > dt{
+width:18%;
+}
+#siteinfo_view dl > dd{
+width:78%;
+}
+#siteinfo_view dl > dd > dl > dt{
+width:16%;
+}
+#siteinfo_view dl > dd > dl > dd{
+width:80%;
+background:#ffffff;
+}
+
+
+#siteinfo_view textarea{
+width:100%;
+min-height:3em;
+background:#eee;
+}
+#siteinfo_view textarea[readonly="readonly"]{
+background:#eee;
+resize:none;
+border:none;
+outline:none;
+}
+#siteinfo_view textarea[data-modified="modified"]{
+background:#ece;
+}
+#siteinfo_table tr[data-modified="modified"]{
+background:#ece;
+}
+.name button{
+background: #eee;
+background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff));
+color:#222;
+border:1px solid #aaa;
+cursor:pointer;
+width:100%;
+margin:0;
+}
+
+#siteinfo_nav a:hover{
+background:#993333;
+color:#ffffff;
+}
+#siteinfo_nav a:target{
+background:#6c521c;
+color:#ffffff;
+}
+#siteinfo_nav a{
+text-decoration:none;
+background:#e8d2a6;
+display:inline-block;
+color:#404040;
+margin:1px 3px;
+padding:1px;
+border-radius:4px;
+-webkit-border-radius:4px;
+min-width:1.5em;
+border:none;
+text-align:center;
+font-weight:bold;
+font-size:small;
+}
+#siteinfo_search_input{
+width:90%;
+border:2px solid #ff9933;
+border-radius:3px;
+-webkit-border-radius:3px;
+}
+#siteinfo_head th{
+	margin:0;
+	padding:0;
+}
+#siteinfo_head th button{
+	background: #333;
+	background: -webkit-gradient(linear, left top, left bottom, from(#333), to(#888));
+	border:1px solid #888;
+	cursor:pointer;
+	color:#fff;
+	width:100%;
+	height:4.2em;
+	margin:0;
+	display:block;
+}
+#siteinfo_head th button.c-down:before{
+	content:'▼';
+}
+#siteinfo_head th button.c-up:before{
+	content:'▲';
+}
+#siteinfo_head th button.c-down{
+	background: #ddd;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+	color:#222;
+}
+#siteinfo_head th button.c-up{
+	background: #ddd;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#fff));
+	color:#222;
+}
+</style>
+<script>
+if(this.chrome){
+	document.write(
+		'<script src="chrome-extension://okneonigbfnolfkmfgjmaeniipdjkgkl/chrome_keyconfig.js"><\/script>'+
+		'<script src="chrome-extension://jpkfjicglakibpenojifdiepckckakgk/chrome_gestures.user.js"><\/script>'
+	);
+}
+</script>
+</head>
+<body>
+<div class="top">
+	<h1>AutoPatchWork SITEINFO Manager</h1>
+	<p><label for="siteinfo_search_input">Search:</label><input type="search" id="siteinfo_search_input"></p>
+	<ul id="siteinfo_nav">
+	</ul>
+</div>
+<table id="siteinfo_table">
+<thead>
+<tr id="siteinfo_head">
+<th></th>
+<th>disable</th>
+<th><button>name</button></th>
+<th><button>created at</button></th>
+<th><button>updated at</button></th>
+<th><button>created by</button></th>
+<th><button>resource url</button></th>
+<th><button>database resource url</button></th>
+<th><button>number of successful</button></th>
+<th><button>number of failed</button></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<table style="display:none;"><tbody id="tmpl_siteinfo_body"><tr>
+<td class="index"></td>
+<td class="onoff"><input type="checkbox" class="onoff"></td>
+<td class="name"><button></button></td>
+<td class="created_at"></td>
+<td class="updated_at"></td>
+<td class="created_by"></td>
+<td class="resource_url"></td>
+<td class="database_resource_url"></td>
+<td class="number_of_successful"></td>
+<td class="number_of_failed"></td>
+</tr></tbody></table>
+
+<div id="siteinfo_view"></div>
+
+<script src="js/Storage.js"></script>
+<script src="includes/AutoPatchWork.js"></script>
+<script src="js/siteinfo_manager.js"></script>
+
+</body>
+</html>

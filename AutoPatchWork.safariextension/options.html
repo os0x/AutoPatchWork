@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AutoPatchWork</title>
+<link href="css/option_page.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/x.js"></script>
+<script type="text/javascript" src="js/tween2.js"></script>
+<body>
+<ul class="tabs" id="menu_tabs">
+  <li class="basics"><a href="#basics" class="active"><span>Basics</span></a>
+  <li class="filters"><a href="#filters"><span>Filters</span></a>
+  <li class="styles"><a href="#styles"><span>Styles</span></a>
+  <li class="news"><a href="#news"><span>News</span></a>
+  <li class="about"><a href="#about"><span>About</span></a>
+</ul>
+<div id="container">
+<div id="inner_container">
+<section id="basics" class="content">
+  <div class="buttons"><button id="update_siteinfo" class="MSG_update_siteinfo">Update SITEINFO</button><span id="update_siteinfo_output"></span></div>
+  <div class="buttons"><button id="open_siteinfo_manager" class="MSG_open_siteinfo_manager">Open SITEINFO manager</button></div>
+  <div><input type="checkbox" id="auto_start"><label for="auto_start" class="MSG_auto_start">auto start</label></div>
+  <div><input type="checkbox" id="target_blank"><label for="target_blank" class="MSG_open_newtab">open new tabs from inserted links</label></div>
+  <div><input type="checkbox" id="disable_iframe"><label for="disable_iframe" class="MSG_noiframe">not work FRAME</label></div>
+  <div>
+    <span class="mins">0</span>
+    <input type="range" id="remain_height" max="2000" min="0" step="10">
+    <span class="maxs">2000</span>
+  </div>
+  <div class="outputs">
+    <label for="remain_height" class="MSG_remain_height">base remain height</label> <span class="outputs" id="remain_height_value"></span>
+  </div>
+  <div><input type="checkbox" id="debug_mode"><label for="debug_mode" class="MSG_debugmode">debug mode</label></div>
+  <div>
+    <h4 class="MSG_bottom_bar">status bar on page bottom</h4>
+    <p><input type="radio" name="bar_status" id="bar_on" value="on"><label for="bar_on" class="MSG_bar_on">ON</label>
+    <p><input type="radio" name="bar_status" id="bar_off" value="off"><label for="bar_off" class="MSG_bar_off">OFF</label>
+  </div>
+</section>
+<section id="filters" class="content">
+  <div class="MSG_exclude_filter">Exclude Filter by URL</div>
+  <ul id="filter_list">
+  </ul>
+  <select id="filter_type">
+    <option class="MSG_filter_prefix" value="prefix">prefix</option>
+    <option class="MSG_filter_domain" value="domain">domain</option>
+    <option class="MSG_filter_regexp" value="regexp">regexp</option>
+  </select>
+  <input type="text" id="filter_text" value="">
+  <button id="add_filter" class="MSG_add">Add</button>
+</section>
+<section id="styles" class="content">
+  <div class="MSG_separator_style">Page Separator Style</div>
+  <textarea id="css_text"></textarea>
+  <div><button id="apply_css" class="MSG_save">Save</button></div>
+  <div><button id="reset_css" class="MSG_reset">Reset</button></div>
+</section>
+<section id="news" class="content">
+  <ul>
+    <li>
+      <h4>2012/01/03 20:14</h4>
+      <p>(Chromeでのみ)別ドメインのページを読み込んでしまう問題を修正(thanks! xKhorasanさん)
+    </li>
+  <li>
+    <h4>2011/05/31 0:24</h4>
+    <p>target=_blank指定でないとき、ブラウザの戻る使用した場合に、ページの継ぎ足しを復元するように変更。
+  </li>
+  <li>
+    <h4>2011/05/15 19:21</h4>
+    <p>Googleのインスタント検索対応。
+    <p>(2011/05/15 23：37 追記) 追加でページナンバーのズレ修正、挿入位置のズレ修正。インスタント検索対応のアドバイス、バグ報告を頂いた<a href="https://twitter.com/mono0x">@mono0x</a>さんに感謝！
+  </li>
+  <li>
+    <h4>2011/04/03 15:51</h4>
+    <p>Safariユーザー向け：環境によって(トラックパッドで2本指スクロールしたときに)継ぎ足し時にスクロール位置がずれる問題を修正してみたつもりです。オプション周りの問題も後で修正します。
+  </li>
+  <li>
+    <h4>2011/02/09 23:20</h4>
+    <p>ページ下部のステータスバーの表示オプションを追加しました。スクロールが重く感じる場合、OFFにすると改善されるかもしれません。
+  </li>
+  <li>
+    <h4>2011/02/04 01:35</h4>
+    <p>SITEINFOに間違った正規表現があったときに処理が止まってしまうバグを修正しました。
+  </li>
+  <li>
+    <h4>2010/10/24 12:43</h4>
+    <p>Filtersが適用されないバグを修正しました。Thx <a href="http://twitter.com/syoichi/status/28557748256" target="_blank">@syoichi</a>!
+  </li>
+  <li>
+    <h4>2010/10/24 1:53</h4>
+    <ul>
+    <li>Chrome本体の言語設定にあわせて、一部日本語化しました。
+    <li>SITEINFOの管理機能を実装しました。
+    <li>Tumblrで画像がきれいに表示されない問題に対応しました。
+    <li>NAVERまとめに対応しました。
+    </ul>
+  </li>
+  <li>
+    <h4>2010/06/16 16:03</h4>
+    <p>Yahoo対策(リダイレクトを挟むサイト対策)が一部のサイトに誤爆していたのを修正しました。</p>
+  </li>
+  <li>
+    <h4>2010/06/15 17:24</h4>
+    <p>新しいタブで開く指定が効いてなかったのを修正。また、新しいタブで開かないときは履歴に記録を残す(history.pushState)ことで、履歴で戻った際にクリックしたリンクのあるページに戻るように対策しました。ただ、スクロール位置がずれるのが課題です。</p>
+  </li>
+  <li>
+    <h4>2010/06/15 14:27</h4>
+    <p>Safari版に合わせて、ページの下にラインを表示するようにしました。これにより、フレームを使ったページでもON/OFFの制御が可能になりました。また、フッターを見たい時にOFFにしやすくなったと思います。</p>
+    <p>適用しようとして失敗したSITEINFOを記録するようにしました。やはり、使ってないSITEINFOを無効にするためのデータとして使う予定です。</p>
+  </li>
+  <li>
+    <h4>2010/02/18 2:57</h4>
+    <p>Filterの定義の仕方を前方一致、ドメインの一致、正規表現の3つから選べるようにしました。</p>
+    <p>SITEINFOを2日間キャッシュするようにしました。代わりに、siteinfoを更新するボタンをつけてあります(更新先をバックアップファイルにするか、wedataにするか迷いましたが、バックアップの方にしました)。</p>
+    <p>実際に使用したSITEINFOを記録するようにしました。後で、自分が良く使うSITEINFOを一覧したり、使ってないSITEINFOを無効にしたりすることができるようにする予定です。</p>
+  </li>
+  <li>
+    <h4>2010/01/12 20:34</h4>
+    <p>base remain height(どこまでスクロールしたら次のページの読み込みするか決める変数)を設定できるようにしました。</p>
+  </li>
+  <li>
+    <h4>2010/01/12 19:52</h4>
+    <p>デバッグモードを追加しました。</p>
+  </li>
+  <li>
+    <h4>2009/11/02 14:45</h4>
+    <p>設定項目をいくつか追加しました。(ページ区切りの)スタイルをCSSでカスタマイズできるようにしました。</p>
+  </li>
+  <li>
+    <h4>2009/10/23 12:08</h4>
+    <p>Chrome 4.0.223.9で落ちるバグを修正しました。</p>
+  </li>
+  </ul>
+</section>
+<section id="about" class="content">
+  <dl>
+    <dt>Name:<dt>
+    <dd><a href="http://code.google.com/p/autopatchwork/" target="_blank">AutoPatchWork</a></dd>
+    <dt>Author:<dt>
+    <dd><a href="http://ss-o.net/" target="_blank">os0x</a></dd>
+    <dt>Thanks:<dt>
+    <dd><a href="http://autopagerize.net/" target="_blank">AutoPagerize</a></dd>
+    <dt>License:<dt>
+    <dd><a href="http://os0x.mit-license.org/" target="_blank">The MIT license</a></dd>
+  </dl>
+</section>
+</div>
+</div>
+<script src="js/options.js"></script>
+</body>
+</html>
