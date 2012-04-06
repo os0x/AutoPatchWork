@@ -613,38 +613,43 @@
       }
       append_point.insertBefore(root, insert_point);
       var docs = get_next_elements(htmlDoc);
-      var first = docs[0];
-      docs.forEach(function(doc,i,docs){
-        var insert_node = append_point.insertBefore(document.importNode(doc, true), insert_point);
-        var mutation = {
-          targetNode:insert_node,
-          type:'AutoPatchWork.DOMNodeInserted',
-          canBubble:true,
-          cancelable:false,
-          relatedNode:append_point,
-          prevValue:null,
-          newValue:loaded_url,
-          attrName:null,
-          attrChange:null
-        };
-        dispatch_mutation_event(mutation);
-        docs[i] = insert_node;
-      });
-      if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
-      next = get_next(htmlDoc);
-      if (!next) {
-        dispatch_event('AutoPatchWork.terminated',{message:'nextLink not found.'});
+      if (!docs || docs == '') {
+      	dispatch_event('AutoPatchWork.terminated');
+      	if (debug) message('The next page\'s content was null or empty.');
       } else {
-        next_href = next.getAttribute('href') || next.getAttribute('action') || next.getAttribute('value');
-        if (next_href && !loaded_urls[next_href]) {
-          loaded_urls[next_href] = true;
+        var first = docs[0];
+        docs.forEach(function(doc,i,docs){
+          var insert_node = append_point.insertBefore(document.importNode(doc, true), insert_point);
+          var mutation = {
+            targetNode:insert_node,
+            type:'AutoPatchWork.DOMNodeInserted',
+            canBubble:true,
+            cancelable:false,
+            relatedNode:append_point,
+            prevValue:null,
+            newValue:loaded_url,
+            attrName:null,
+            attrChange:null
+          };
+          dispatch_mutation_event(mutation);
+          docs[i] = insert_node;
+        });
+        if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
+        next = get_next(htmlDoc);
+        if (!next) {
+          dispatch_event('AutoPatchWork.terminated',{message:'nextLink not found.'});
         } else {
-          return dispatch_event('AutoPatchWork.error',{message:next_href + ' is already loaded.'});
+          next_href = next.getAttribute('href') || next.getAttribute('action') || next.getAttribute('value');
+          if (next_href && !loaded_urls[next_href]) {
+            loaded_urls[next_href] = true;
+          } else {
+            return dispatch_event('AutoPatchWork.error',{message:next_href + ' is already loaded.'});
+          }
+          bar && (bar.className = status.state ? 'on' : 'off');
+          setTimeout(function(){
+            check_scroll();
+          }, 1000);
         }
-        bar && (bar.className = status.state ? 'on' : 'off');
-        setTimeout(function(){
-          check_scroll();
-        }, 1000);
       }
       dispatch_event('AutoPatchWork.pageloaded');
       htmlDoc = null;
