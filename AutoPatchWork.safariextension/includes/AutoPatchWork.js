@@ -480,7 +480,7 @@
       if(!loading){
         loading = true;
       }
-      var url = state.nextURL = next.href || next.getAttribute('href') || next.action || next.value;
+      var url = state.nextURL = next.href || next.getAttribute('href') || next.action || next.getAttribute('action') || next.value || next.getAttribute('value');
       var x = new XMLHttpRequest();
       x.onload = function() {
         dispatch_event('AutoPatchWork.load',{response:x, url:url});
@@ -496,7 +496,7 @@
       if(!loading){
         loading = true;
       }
-      var url = state.nextURL = next.href || next.getAttribute('href') || next.action || next.value;
+      var url = state.nextURL = next.href || next.getAttribute('href') || next.action || next.getAttribute('action') || next.value || next.getAttribute('value');
       var s = document.createElement('script');
       s.textContent = '(' + function(url){
         var x = new XMLHttpRequest();
@@ -529,7 +529,7 @@
       if(!loading){
         loading = true;
       }
-      var url = state.nextURL = next.href || next.getAttribute('href') || next.action || next.value;
+      var url = state.nextURL = next.href || next.getAttribute('href') || next.action || next.getAttribute('action') || next.value || next.getAttribute('value');
       var iframe = document.createElement('iframe');
       iframe.style.display = 'none';
       iframe.id = iframe.name = 'AutoPatchWork-request-frame';
