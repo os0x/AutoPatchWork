@@ -613,6 +613,11 @@
       append_point.insertBefore(root, insert_point);
       var docs = get_next_elements(htmlDoc);
       var first = docs[0];
+      if (!first) {
+        dispatch_event('AutoPatchWork.terminated', {message: 'The next page\'s pageElement was empty.'});
+        htmlDoc = null;
+        return;
+      }
       docs.forEach(function(doc,i,docs){
         var insert_node = append_point.insertBefore(document.importNode(doc, true), insert_point);
         var mutation = {
