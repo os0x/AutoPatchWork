@@ -18,5 +18,5 @@
    "name": "AutoPatchWork",
    "permissions": [ "http://wedata.net/", "http://ss-o.net/", "tabs" ],
    "options_page": "options.html",
-   "version": "1.9.6"
+   "version": "1.9.7"
 }
