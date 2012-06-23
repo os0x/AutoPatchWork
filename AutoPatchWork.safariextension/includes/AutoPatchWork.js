@@ -183,11 +183,10 @@
       var _get_next = get_next;
       get_next = function(doc) {
         var next = _get_next(doc);
-        if (!next || !next.hasAttribute('onclick')) return;
-        var nextpage = next.getAttribute('onclick').match(/goPage\(\s*(\d+)\s*\)/)[1];
-        var form=document.getElementsByName('missionViewForm')[0];
-        var param=[].slice.call(form).map(function(i){return i.name+'='+(i.name==='page'?nextpage:i.value);}).join('&');
-        next.href = location.pathname+'?'+param;
+        if (!next) return;
+        if (next.getAttribute('href') !== '#') return next;
+        var page = next.textContent.trim();
+        next.href = location.pathname + (/[?&]page=\d+/.test(location.search) ? location.search.replace(/page=\d+/, 'page=' + page) : (location.search ? location.search + '&' : '?') + 'page=' + page);
         return next;
       };
       next = get_next(document);
