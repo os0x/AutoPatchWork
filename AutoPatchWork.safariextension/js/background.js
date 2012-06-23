@@ -355,8 +355,8 @@ function Siteinfo(info) {
   siteinfo.push.apply(siteinfo, MICROFORMATs);
   siteinfo.push({
     "url":          "^http://matome\\.naver\\.jp/",
-    "nextLink":    "id(\"_pageNavigation\")//a[contains(@class, \"mdPagination01Next\")]",
-    "pageElement": "//div[contains(@class, \"blMain00Body\")]/*",
+    "nextLink":    "//div[contains(@class, \"MdPagination03\")]/a[preceding-sibling::strong]",
+    "pageElement": "//div[contains(@class, \"MdMTMWidgetList01\")]/*",
     //exampleUrl:  'http://matome.naver.jp/odai/2124461146762161898',
     "wedata.net.id": "matome.naver"
   });
