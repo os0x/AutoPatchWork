@@ -183,11 +183,10 @@
       var _get_next = get_next;
       get_next = function(doc) {
         var next = _get_next(doc);
-        if (!next || !next.hasAttribute('onclick')) return;
-        var nextpage = next.getAttribute('onclick').match(/goPage\(\s*(\d+)\s*\)/)[1];
-        var form=document.getElementsByName('missionViewForm')[0];
-        var param=[].slice.call(form).map(function(i){return i.name+'='+(i.name==='page'?nextpage:i.value);}).join('&');
-        next.href = location.pathname+'?'+param;
+        if (!next) return;
+        if (next.getAttribute('href') !== '#') return next;
+        var page = next.textContent.trim();
+        next.href = location.pathname + (/[?&]page=\d+/.test(location.search) ? location.search.replace(/page=\d+/, 'page=' + page) : (location.search ? location.search + '&' : '?') + 'page=' + page);
         return next;
       };
       next = get_next(document);
@@ -613,43 +612,43 @@
       }
       append_point.insertBefore(root, insert_point);
       var docs = get_next_elements(htmlDoc);
-      if (!docs || docs == '') {
-      	dispatch_event('AutoPatchWork.terminated');
-      	if (debug) message('The next page\'s content was null or empty.');
+      var first = docs[0];
+      if (!first) {
+        dispatch_event('AutoPatchWork.terminated', {message: 'The next page\'s pageElement was empty.'});
+        htmlDoc = null;
+        return;
+      }
+      docs.forEach(function(doc,i,docs){
+        var insert_node = append_point.insertBefore(document.importNode(doc, true), insert_point);
+        var mutation = {
+          targetNode:insert_node,
+          type:'AutoPatchWork.DOMNodeInserted',
+          canBubble:true,
+          cancelable:false,
+          relatedNode:append_point,
+          prevValue:null,
+          newValue:loaded_url,
+          attrName:null,
+          attrChange:null
+        };
+        dispatch_mutation_event(mutation);
+        docs[i] = insert_node;
+      });
+      if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
+      next = get_next(htmlDoc);
+      if (!next) {
+        dispatch_event('AutoPatchWork.terminated',{message:'nextLink not found.'});
       } else {
-        var first = docs[0];
-        docs.forEach(function(doc,i,docs){
-          var insert_node = append_point.insertBefore(document.importNode(doc, true), insert_point);
-          var mutation = {
-            targetNode:insert_node,
-            type:'AutoPatchWork.DOMNodeInserted',
-            canBubble:true,
-            cancelable:false,
-            relatedNode:append_point,
-            prevValue:null,
-            newValue:loaded_url,
-            attrName:null,
-            attrChange:null
-          };
-          dispatch_mutation_event(mutation);
-          docs[i] = insert_node;
-        });
-        if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
-        next = get_next(htmlDoc);
-        if (!next) {
-          dispatch_event('AutoPatchWork.terminated',{message:'nextLink not found.'});
+        next_href = next.getAttribute('href') || next.getAttribute('action') || next.getAttribute('value');
+        if (next_href && !loaded_urls[next_href]) {
+          loaded_urls[next_href] = true;
         } else {
-          next_href = next.getAttribute('href') || next.getAttribute('action') || next.getAttribute('value');
-          if (next_href && !loaded_urls[next_href]) {
-            loaded_urls[next_href] = true;
-          } else {
-            return dispatch_event('AutoPatchWork.error',{message:next_href + ' is already loaded.'});
-          }
-          bar && (bar.className = status.state ? 'on' : 'off');
-          setTimeout(function(){
-            check_scroll();
-          }, 1000);
+          return dispatch_event('AutoPatchWork.error',{message:next_href + ' is already loaded.'});
         }
+        bar && (bar.className = status.state ? 'on' : 'off');
+        setTimeout(function(){
+          check_scroll();
+        }, 1000);
       }
       dispatch_event('AutoPatchWork.pageloaded');
       htmlDoc = null;

@@ -15,9 +15,8 @@
       "128": "Icon-128.png"
    },
    "description": "Automatically loads the next page and inserts into current page when you reach the end of the page. like AutoPagerize.",
-   "id": "pgippdefedhbfjdpladgebmcoghhkhil",
    "name": "AutoPatchWork",
    "permissions": [ "http://wedata.net/", "http://ss-o.net/", "tabs" ],
    "options_page": "options.html",
-   "version": "1.9.6"
+   "version": "1.9.7"
 }
