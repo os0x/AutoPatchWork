@@ -1,5 +1,8 @@
 {
-   "background_page": "index.html",
+   "background": {
+     "scripts": [ "js/Storage.js", "js/background.js" ],
+     "persistent": false
+   },
    "content_scripts": [ {
       "js": [ "includes/AutoPatchWork.js" ],
       "matches": [ "http://*/*" , "https://*/*" ],
@@ -18,5 +21,6 @@
    "name": "AutoPatchWork",
    "permissions": [ "http://wedata.net/", "http://ss-o.net/", "tabs" ],
    "options_page": "options.html",
-   "version": "1.9.7"
+   "version": "1.9.8",
+   "manifest_version": 2
 }
