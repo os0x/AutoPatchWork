@@ -512,7 +512,11 @@
       var url = state.nextURL = next.href || next.getAttribute('href') || next.action || next.getAttribute('action') || next.value || next.getAttribute('value');
       var x = new XMLHttpRequest();
       x.onload = function () {
-        dispatch_event('AutoPatchWork.load', {response: x, url: url});
+        if (!x.getResponseHeader('Access-Control-Allow-Origin')) {
+          dispatch_event('AutoPatchWork.load', {response: x, url: url});
+        } else {
+          x.onerror();
+        }
       };
       x.onerror = function () {
         dispatch_event('AutoPatchWork.error', {message: 'request failed. status:' + x.status});
@@ -531,7 +535,11 @@
       s.textContent = '(' + function (url) {
         var x = new XMLHttpRequest();
         x.onload = function () {
-          dispatch_message_event('AutoPatchWork.load.from.page', {responseText: x.responseText, url: url});
+          if (!x.getResponseHeader('Access-Control-Allow-Origin')) {
+            dispatch_message_event('AutoPatchWork.load.from.page', {responseText: x.responseText, url: url});
+          } else {
+            x.onerror();
+          }
         };
         x.onerror = function () {
           dispatch_message_event('AutoPatchWork.error.from.page', {message: 'request failed. status:' + x.status});
