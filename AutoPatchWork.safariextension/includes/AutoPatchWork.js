@@ -205,6 +205,7 @@
     var insert_point = status.insert_point = last_element.nextSibling;
     var append_point = status.append_point = last_element.parentNode;
     var htmlDoc, url;
+    var interval = false;
 
     var loaded_urls = {};
     var session_object = {};
@@ -421,7 +422,7 @@
     }
 
     function check_scroll() {
-      if (loading) {
+      if (loading || interval) {
         return;
       }
       var remain = Root.scrollHeight - window.innerHeight - window.pageYOffset;
@@ -594,9 +595,24 @@
       return text;
     }
 
+    function setIntervalOnFailed() {
+      interval = true;
+      setTimeout(function(){
+        interval = false;
+      }, 3 * 1000);
+    }
+
+    function setInterval() {
+      interval = true;
+      setTimeout(function(){
+        interval = false;
+      }, 500);
+    }
+
     function load(evt) {
       loading = false;
       if (!evt.response && !evt.htmlDoc) {
+        setIntervalOnFailed();
         return;
       }
       loaded_url = evt.url;
@@ -605,6 +621,7 @@
       } else if (evt.htmlDoc) {
         htmlDoc = evt.htmlDoc;
       } else {
+        setIntervalOnFailed();
         return;
       }
       status.loaded = true;
@@ -615,6 +632,7 @@
           saveText(loaded_url, status.page_number, htmlDoc.outerHTML || htmlDoc.documentElement.outerHTML);
         }
       }
+      setInterval();
       dispatch_event('AutoPatchWork.append');
     }
 
@@ -656,6 +674,7 @@
         a.setAttribute('title', htmlDoc.querySelector('title').textContent.trim());
       }
       append_point.insertBefore(root, insert_point);
+      var docHeight = document.height;
       var docs = get_next_elements(htmlDoc);
       var first = docs[0];
       if (!first) {
@@ -680,6 +699,9 @@
         docs[i] = insert_node;
       });
       if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
+      if (docHeight === document.height) {
+        return dispatch_event('AutoPatchWork.error', {message: 'missing next page contents'});
+      }
       next = get_next(htmlDoc);
       if (!next) {
         dispatch_event('AutoPatchWork.terminated', {message: 'nextLink not found.'});
