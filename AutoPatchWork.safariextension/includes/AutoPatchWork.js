@@ -674,7 +674,7 @@
         a.setAttribute('title', htmlDoc.querySelector('title').textContent.trim());
       }
       append_point.insertBefore(root, insert_point);
-      var docHeight = document.height;
+      var docHeight = document.body.clientHeight;
       var docs = get_next_elements(htmlDoc);
       var first = docs[0];
       if (!first) {
@@ -699,7 +699,7 @@
         docs[i] = insert_node;
       });
       if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
-      if (docHeight === document.height) {
+      if (docHeight === document.body.clientHeight) {
         return dispatch_event('AutoPatchWork.error', {message: 'missing next page contents'});
       }
       next = get_next(htmlDoc);
