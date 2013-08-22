@@ -674,7 +674,7 @@
         a.setAttribute('title', htmlDoc.querySelector('title').textContent.trim());
       }
       append_point.insertBefore(root, insert_point);
-      var docHeight = document.body.clientHeight;
+      var docHeight = documentHeight();
       var docs = get_next_elements(htmlDoc);
       var first = docs[0];
       if (!first) {
@@ -699,7 +699,7 @@
         docs[i] = insert_node;
       });
       if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
-      if (docHeight === document.body.clientHeight) {
+      if (docHeight === documentHeight()) {
         return dispatch_event('AutoPatchWork.error', {message: 'missing next page contents'});
       }
       next = get_next(htmlDoc);
@@ -719,6 +719,10 @@
       }
       dispatch_event('AutoPatchWork.pageloaded');
       htmlDoc = null;
+    }
+
+    function documentHeight() {
+      return Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
     }
 
     function createXHTML(str) {
