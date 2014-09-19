@@ -676,6 +676,7 @@
       append_point.insertBefore(root, insert_point);
       var docHeight = documentHeight();
       var docs = get_next_elements(htmlDoc);
+      var elementHeight = pageElementHeight(docs[docs.length - 1]);
       var first = docs[0];
       if (!first) {
         dispatch_event('AutoPatchWork.terminated', {message: 'The next page\'s pageElement was empty.'});
@@ -699,7 +700,7 @@
         docs[i] = insert_node;
       });
       if (status.bottom) status.bottom.style.height = Root.scrollHeight + 'px';
-      if (docHeight === documentHeight()) {
+      if (elementHeight === pageElementHeight(docs[docs.length - 1]) && docHeight === documentHeight()) {
         return dispatch_event('AutoPatchWork.error', {message: 'missing next page contents'});
       }
       next = get_next(htmlDoc);
@@ -723,6 +724,10 @@
 
     function documentHeight() {
       return Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+    }
+    
+    function pageElementHeight(element) {
+      return element.parentNode.scrollHeight;
     }
 
     function createXHTML(str) {
