@@ -683,6 +683,11 @@
         return;
       }
       docs.forEach(function (doc, i, docs) {
+        Array.prototype.forEach.call(doc.querySelectorAll('img'), function(img) {
+          if (!img.getAttribute('src').test(/(^https?:\/\/|^data:|^\/)/)) {
+            img.setAttribute('src', next.getAttribute('href').replace(/\/[\w:%#\$&\?\(\)~\.=\+\-]*$/, '/') + img.getAttribute('src'));
+          }
+        });
         var insert_node = append_point.insertBefore(document.importNode(doc, true), insert_point);
         var mutation = {
           targetNode: insert_node,
