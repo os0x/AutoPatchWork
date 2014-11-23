@@ -684,7 +684,7 @@
       }
       docs.forEach(function (doc, i, docs) {
         Array.prototype.forEach.call(doc.querySelectorAll('img'), function(img) {
-          if (!img.getAttribute('src').test(/(^https?:\/\/|^data:|^\/)/)) {
+          if (!img.getAttribute('src').match(/(^https?:\/\/|^data:|^\/)/)) {
             img.setAttribute('src', next.getAttribute('href').replace(/\/[\w:%#\$&\?\(\)~\.=\+\-]*$/, '/') + img.getAttribute('src'));
           }
         });
