@@ -55,8 +55,8 @@
 		</dict>
 	</dict>
 	<key>Update Manifest URL</key>
-	<string>http://ss-o.net/safari/extension/AutoPatchWork/update.plist</string>
+	<string>http://os0x.heteml.jp/ss-onet/safari/extension/AutoPatchWork/update.plist</string>
 	<key>Website</key>
-	<string>http://ss-o.net/</string>
+	<string>http://os0x.heteml.jp/</string>
 </dict>
 </plist>
