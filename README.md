@@ -8,7 +8,7 @@ Automatically loads the next page and inserts into current page when you reach t
 
 - Safari
 
-    [http://ss-o.net/safari/extension/AutoPatchWork.safariextz](http://ss-o.net/safari/extension/AutoPatchWork.safariextz)
+    [http://os0x.heteml.jp/ss-onet/safari/extension/AutoPatchWork.safariextz](http://os0x.heteml.jp/ss-onet/safari/extension/AutoPatchWork.safariextz)
 
 - Opera
 
