@@ -125,11 +125,7 @@ init_barcss();
 var version = '', Manifest;
 IconData = {};
 
-get_manifest(function (content) {
-  var _manifest = JSON.parse(content);
-  Manifest = _manifest;
-  version = _manifest.version;
-});
+get_manifest();
 
 function siteinfoFromCache() {
   var data = Strg.get('siteinfo_wedata', true);
@@ -382,8 +378,12 @@ function load_resource(url, callback) {
   };
   xhr.send(null);
 }
-function get_manifest(callback) {
-  load_resource('./manifest.json', callback);
+function get_manifest() {
+  load_resource('./manifest.json', function (content) {
+    var _manifest = JSON.parse(content);
+    Manifest = _manifest;
+    version = _manifest.version;
+  });
 }
 function init_css() {
   load_resource('css/AutoPatchWork.css', AutoPatchWork.save_css);
