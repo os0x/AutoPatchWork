@@ -125,10 +125,7 @@ init_barcss();
 var version = '', Manifest;
 IconData = {};
 
-get_manifest(function (_manifest) {
-  Manifest = _manifest;
-  version = _manifest.version;
-});
+get_manifest();
 
 function siteinfoFromCache() {
   var data = Strg.get('siteinfo_wedata', true);
@@ -373,32 +370,28 @@ function Siteinfo(info) {
   Strg.set('siteinfo_wedata', {siteinfo: siteinfo, timestamp: timestamp.toLocaleString()}, {day: 1});
   applyCustom();
 }
-function get_manifest(callback) {
-  var url = './manifest.json';
+function load_resource(url, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    callback(JSON.parse(xhr.responseText));
-  };
   xhr.open('GET', url, true);
+  xhr.onload = function () {
+    callback(xhr.responseText);
+  };
   xhr.send(null);
+}
+function get_manifest() {
+  load_resource('./manifest.json', function (content) {
+    var _manifest = JSON.parse(content);
+    Manifest = _manifest;
+    version = _manifest.version;
+  });
 }
 function init_css() {
-  var url = 'css/AutoPatchWork.css';
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.onload = function() {
-    AutoPatchWork.save_css(xhr.responseText);
-  };
-  xhr.send(null);
+  load_resource('css/AutoPatchWork.css', AutoPatchWork.save_css);
 }
 function init_barcss() {
-  var url = 'css/AutoPatchWork.bar.css';
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.onload = function() {
-    AutoPatchWork.barcss = xhr.responseText;
-  };
-  xhr.send(null);
+  load_resource('css/AutoPatchWork.bar.css', function (content) {
+    AutoPatchWork.barcss = content;
+  });
 }
 function UpdateSiteinfo(callback, error_back, force) {
   var sso = 'http://os0x.heteml.jp/ss-onet/json/wedataAutoPagerizeSITEINFO.json';
