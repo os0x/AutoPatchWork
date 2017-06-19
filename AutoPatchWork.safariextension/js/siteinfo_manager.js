@@ -415,7 +415,7 @@ var MICROFORMATs = [
   }
 
   function UpdateSiteinfo(callback) {
-    var url = 'http://ss-o.net/json/wedataAutoPagerize.json';
+    var url = 'http://wedata.net/databases/AutoPagerize/items.json';
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
       try {
